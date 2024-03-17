@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-public class TpSpring1Application {
+public class TpSpring1Application  {
     @Autowired
     private PatService patService;
     public static void main(String[] args) {
         SpringApplication.run(TpSpring1Application.class, args);
     }
-
     @Bean
-    CommandLineRunner start(PatService patService , MedecinRepository medecinRepository){
+    CommandLineRunner start(PatService patService , MedecinRepository  medecinRepository){
         return args -> {
+            /*
             // ajouter un patient
             Patient pat1 = new Patient();
             pat1.setNom("Ahmed");
@@ -41,10 +41,7 @@ public class TpSpring1Application {
                         pat.setDateNaissance(new Date());
                         patService.ajouterPatient(pat);
                     }
-
-
             );
-
             //ajouter des medecins
             Stream.of("Alae","Fatiha","Omar").forEach(
                     name->{
@@ -55,11 +52,12 @@ public class TpSpring1Application {
                         medecinRepository.save(med);
                     }
             );
-
             //chercher des patients par nom
             List<Patient> patients = patService.rechercherPatients("Samir");
             //chercher un medecin par nom
-            Medecin medecin = medecinRepository.findByNom("Alae");
+            //Medecin medecin = medecinRepository.findByNom("Alae");
+
+             */
         };
     }
 

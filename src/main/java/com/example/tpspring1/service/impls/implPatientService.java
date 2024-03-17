@@ -30,7 +30,7 @@ public class implPatientService implements PatService {
 
     @Override
     public List<Patient> rechercherPatients(String nom) {
-        return patientRepository.findByNom(nom);
+        return null;
     }
 
     @Override

@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
 </head>
 <body>
-$END$
+<div layout:fragment="content">
+<div class="container m-5">
+    <div class="card">
+        <div class="card-header">
+            <h3>Patients</h3>
+        </div>
+        <div class="card-body">
+            <form method="get" th:action="@{index}">
+                <label>Rechercher</label>
+                <input type="text" name="keyword" th:value="${keyword}"/>
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </form>
+            <table class="table ">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th >Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Score</th>
+                    <th>Malade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="patient : ${patients}">
+                    <td th:text="${patient.id}"></td>
+                    <td th:text="${patient.nom}"></td>
+                    <td th:text="${patient.dateNaissance}"></td>
+                    <td th:text="${patient.score}"></td>
+                    <td th:text="${patient.malade}"></td>
+                    <td>
+                        <!-- delete button on ajoute le keyword et currentPage pour garder les donnes apres la redirection -->
+                        <a class="btn btn-danger" th:href="@{delete(id=${patient.id},keyword=${keyword} ,page=${currentPage})}">Delete</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination align-content-center">
+            <ul class="pagination">
+                <li class="page-item" th:each="page,status : ${pages}">
+                    <a th:class="${status.index==currentPage?'m-1 btn btn-info' :'m-1 btn btn-outline-info' } "
+                       th:text="${status.index}"
+                       th:href="@{index(page=${status.index},keyword=${keyword})}"></a>
+                </li>
+            </ul>
+        </div>
+        </div>
+</div>
+</div>
+
+
 </body>
 </html>
